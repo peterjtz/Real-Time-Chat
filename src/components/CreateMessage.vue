@@ -38,8 +38,29 @@ export default {
   },
   methods: {
     createMessage() {
+      function filterWord(word,badWord,replacement)
+      {
+        var regEx = new RegExp(badWord, "ig");
+
+        return word.replace(regEx, replacement);
+      }
+
+      function filterMessage(msg,wordList)
+      {
+        let replacement = "****";
+        for (let i=0;i<wordList.length;i++)
+        {
+          msg = filterWord(msg,wordList[i], replacement);
+        }
+
+        return msg;
+      }
+
+      const wordList = ["shit","piss","fuck","cunt","cocksucker"];
+
       let inputText = document.getElementById("inputText");
       this.newMessage = inputText.value;
+      this.newMessage = filterMessage(this.newMessage,wordList);
       if (this.newMessage) {
         fb.collection("messages")
           .add({
