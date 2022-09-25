@@ -8,6 +8,7 @@
           class="form-control"
           placeholder="Enter message ..."
           v-model="newMessage"
+          id="inputText"
         />
         <p class="text-danger" v-if="errorText">{{ errorText }}</p>
       </div>
@@ -15,14 +16,20 @@
         Submit
       </button>
     </form>
+    <picker @select="addEmoji" :style="{position: 'absolute', top: '30em', right: '35em'}"/>
   </div>
 </template>
 
 <script>
 import fb from "@/firebase/init";
+//import { VueChatEmoji, emojis } from 'vue-chat-emoji'
+import { Picker } from 'emoji-mart-vue'
 export default {
   name: "CreateMessage",
   props: ["name"],
+  components: {
+    Picker
+  },
   data() {
     return {
       newMessage: null,
@@ -31,6 +38,8 @@ export default {
   },
   methods: {
     createMessage() {
+      let inputText = document.getElementById("inputText");
+      this.newMessage = inputText.value;
       if (this.newMessage) {
         fb.collection("messages")
           .add({
@@ -46,7 +55,11 @@ export default {
       } else {
         this.errorText = "A message must be entered first!";
       }
+    },
+    addEmoji(emoji){
+      let inputText = document.getElementById("inputText");
+      inputText.value = inputText.value + emoji.native;
     }
-  }
+  },
 };
 </script>
