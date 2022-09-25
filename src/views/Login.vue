@@ -8,7 +8,7 @@
                         <input type="text" class="form-control" placeholder="Please enter your name ..." name="name" v-model="name">
                         <p v-if="errorText" class="text-danger">{{errorText}}</p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enter Gusset Chat</button>
+                    <button type="submit" class="btn btn-primary">Gusset Login</button>
                 </form>
                 <p></p>
                 <div>
