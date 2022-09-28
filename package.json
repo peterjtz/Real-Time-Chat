@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "deploy:fb": "firebase deploy --only functions"
+    "deploy:fb": "firebase deploy --only functions",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
