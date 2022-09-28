@@ -20,7 +20,7 @@
     <div class="popup" id="popup">
     <picker class="picker" id="trigger"
       @select="addEmoji"
-      :style="{ position: 'absolute', top: '-5em', right: '1em' }"
+      :style="{ position: 'absolute', top: '-15vh', right: '1.5vw' }"
     />
   </div>
   </div>
@@ -49,11 +49,22 @@ export default {
 
     ref.onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
-        if (change.type == "added") {
-          let doc = change.doc;
-          this.wordList.push(doc.data().word);
-          //debugger;
+        let doc = change.doc;
+        let dWord = doc.data().word;
+        let type = change.type;
+        if (type === "added") {
+          this.wordList.push(dWord);
         }
+        else if(type === "removed"){
+            for (let i=0;i<this.wordList.length;i++)
+            {
+              if(this.wordList[i] === dWord)
+              {
+                this.wordList.splice(i,1);
+                break;
+              }
+            }
+          }
       });
     });
   },
@@ -111,8 +122,8 @@ export default {
 
 .emoji{
   position: relative;
-  right: -25em;
-  top: -5.5em;
+  right: -38vw;
+  top: -16vh;
 }
 
 .popup{

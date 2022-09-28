@@ -48,7 +48,6 @@ export default {
                 .doc(id)
                 .delete();
                 this.newMessage = null;
-                alert("The Word Is Deleted!");
               }
             }
           });

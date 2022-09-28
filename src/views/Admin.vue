@@ -50,12 +50,23 @@
   
       ref.onSnapshot(snapshot => {
         snapshot.docChanges().forEach(change => {
-          if (change.type == "added") {
-            let doc = change.doc;
+          let type = change.type;
+          let doc = change.doc;
+          let dWord = doc.data().word;
+          if (type === "added") {
             this.messages.push({
-              id: doc.id,
-              message: doc.data().word
+              message: dWord
             });
+          }
+          else if(type === "removed"){
+            for (let i=0;i<this.messages.length;i++)
+            {
+              if(this.messages[i].message === dWord)
+              {
+                this.messages.splice(i,1);
+                break;
+              }
+            }
           }
         });
       });
