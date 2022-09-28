@@ -8,16 +8,18 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "deploy:fb": "firebase deploy --only functions",
-    "start": "vue-cli-service test:unit"
+    "start": "node server.js"
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.4",
     "emoji-mart-vue": "^2.6.6",
+    "express": "^4.18.1",
     "firebase": "^7.14.5",
     "jquery": "^3.5.1",
     "moment": "^2.26.0",
     "popper.js": "^1.16.1",
+    "serve-static": "^1.15.0",
     "vue": "^2.6.11",
     "vue-chat-emoji": "^1.1.27",
     "vue-chat-scroll": "^1.4.0",
