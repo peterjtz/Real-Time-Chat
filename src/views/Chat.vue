@@ -1,5 +1,8 @@
 <template>
   <div class="chat container">
+    <div class="signOutDiv">
+      <button type="submit" class="signOut" @click="signout()">Sign Out</button>
+    </div>
     <h2 class="text-primary text-center">Real-Time Chat</h2>
     <h5 class="text-secondary text-center">Powered by Vue.js & Firebase</h5>
     <div class="card">
@@ -54,7 +57,12 @@ export default {
         }
       });
     });
+  },
+  methods:{
+    signout(){
+    this.$router.push({name:'Login'});
   }
+}
 };
 </script>
 
@@ -81,5 +89,17 @@ export default {
 .messages {
   max-height: 300px;
   overflow: auto;
+}
+
+.signOut {
+  display: inline-block;
+  overflow: auto;
+  background-color: red;
+  margin-top:1em;
+  margin-bottom: 0;
+}
+
+.signOutDiv{
+  text-align: right;
 }
 </style>

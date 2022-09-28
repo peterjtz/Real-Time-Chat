@@ -8,6 +8,7 @@
           class="form-control"
           placeholder="Enter message ..."
           v-model="newMessage"
+          id="inputText"
         />
         <p class="text-danger" v-if="errorText">{{ errorText }}</p>
       </div>
@@ -15,30 +16,77 @@
         Submit
       </button>
     </form>
+    <button class="emoji" @click="popup()">Emoji</button>
+    <div class="popup" id="popup">
+    <picker class="picker" id="trigger"
+      @select="addEmoji"
+      :style="{ position: 'absolute', top: '-5em', right: '1em' }"
+    />
+  </div>
   </div>
 </template>
 
 <script>
 import fb from "@/firebase/init";
+//import { VueChatEmoji, emojis } from 'vue-chat-emoji'
+import { Picker } from "emoji-mart-vue";
 export default {
   name: "CreateMessage",
   props: ["name"],
+  components: {
+    Picker,
+  },
   data() {
     return {
       newMessage: null,
-      errorText: null
+      errorText: null,
+      wordList: [],
     };
+  },
+  created() {
+    // Create Word List
+    let ref = fb.collection("wordList");
+
+    ref.onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type == "added") {
+          let doc = change.doc;
+          this.wordList.push(doc.data().word);
+          //debugger;
+        }
+      });
+    });
   },
   methods: {
     createMessage() {
+      function filterWord(word, badWord, replacement) {
+        var regEx = new RegExp(badWord, "ig");
+
+        return word.replace(regEx, replacement);
+      }
+
+      function filterMessage(msg, wordList) {
+        let replacement = "****";
+        for (let i = 0; i < wordList.length; i++) {
+          msg = filterWord(msg, wordList[i], replacement);
+        }
+
+        return msg;
+      }
+
+      //const wordList = ["shit","piss","fuck","cunt","cocksucker"];
+
+      let inputText = document.getElementById("inputText");
+      this.newMessage = inputText.value;
+      this.newMessage = filterMessage(this.newMessage, this.wordList);
       if (this.newMessage) {
         fb.collection("messages")
           .add({
             message: this.newMessage,
             name: this.name,
-            timestamp: Date.now()
+            timestamp: Date.now(),
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
         this.newMessage = null;
@@ -46,7 +94,36 @@ export default {
       } else {
         this.errorText = "A message must be entered first!";
       }
+    },
+    addEmoji(emoji) {
+      let inputText = document.getElementById("inputText");
+      inputText.value = inputText.value + emoji.native;
+    },
+    popup(){
+      let trigger = document.getElementById("trigger");
+      trigger.classList.toggle("hide");
     }
-  }
+  },
 };
 </script>
+
+<style>
+
+.emoji{
+  position: relative;
+  right: -25em;
+  top: -5.5em;
+}
+
+.popup{
+  visibility: hidden;
+}
+
+.picker{
+  visibility: hidden;
+}
+
+.hide{
+  visibility: visible;
+}
+</style>

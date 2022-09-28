@@ -2,6 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Chat from "../views/Chat.vue";
+import Signin from "../views/Signin.vue";
+import Signup from "../views/Signup.vue"
+import Admin from "../views/Admin.vue"
 
 Vue.use(VueRouter);
 
@@ -24,6 +27,21 @@ const routes = [
         next({ name: "Login" });
       }
     }
+  },
+  {
+    path: "/signin",
+    name: "Signin",
+    component: Signin
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: Signup
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin
   }
 ];
 
