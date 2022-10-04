@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="card sign up">
+  <div class="container log">
+    <div class="card sign up log1 log2">
       <div class="card-body">
         <h2 class="card-title text-center">Account Sign Up</h2>
         <form @submit.prevent="signup" class="text-center">
@@ -129,5 +129,10 @@ export default {
   margin-left: auto;
   margin-right: auto;
   background-color: blue;
+}
+
+.log2 {
+  margin-left: 30%;
+  margin-right: 30%;
 }
 </style>

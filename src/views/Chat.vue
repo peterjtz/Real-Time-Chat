@@ -1,25 +1,29 @@
 <template>
-  <div class="chat container">
-    <div class="signOutDiv">
-      <button type="submit" class="signOut" @click="signout()">Sign Out</button>
-    </div>
-    <h2 class="text-primary text-center">Real-Time Chat</h2>
-    <h5 class="text-secondary text-center">Powered by Vue.js & Firebase</h5>
-    <div class="card">
-      <div class="card-body">
-        <p class="nomessages text-secondary" v-if="messages.length == 0">
-          [No messages yet!]
-        </p>
-        <div class="messages" v-chat-scroll="{ always: false, smooth: true }">
-          <div v-for="message in messages" :key="message.id">
-            <span class="text-info">[{{ message.name }}]: </span>
-            <span>{{ message.message }}</span>
-            <span class="text-secondary time">{{ message.timestamp }}</span>
+  <div class="chat1">
+    <div class="chat container">
+      <div class="signOutDiv">
+        <button type="submit" class="signOut" @click="signout()">
+          Sign Out
+        </button>
+      </div>
+      <h2 class="text-primary text-center">Real-Time Chat</h2>
+      <h5 class="text-secondary text-center">Powered by Vue.js & Firebase</h5>
+      <div class="card">
+        <div class="card-body">
+          <p class="nomessages text-secondary" v-if="messages.length == 0">
+            [No messages yet!]
+          </p>
+          <div class="messages" v-chat-scroll="{ always: false, smooth: true }">
+            <div v-for="message in messages" :key="message.id">
+              <span class="text-info">[{{ message.name }}]: </span>
+              <span>{{ message.message }}</span>
+              <span class="text-secondary time">{{ message.timestamp }}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card-action">
-        <CreateMessage :name="name" />
+        <div class="card-action">
+          <CreateMessage :name="name" />
+        </div>
       </div>
     </div>
   </div>
@@ -34,35 +38,35 @@ export default {
   name: "Chat",
   props: ["name"], // will also have other props like 'guest'
   components: {
-    CreateMessage
+    CreateMessage,
   },
   data() {
     return {
-      messages: []
+      messages: [],
     };
   },
   created() {
     let ref = fb.collection("messages").orderBy("timestamp");
 
-    ref.onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
+    ref.onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
         if (change.type == "added") {
           let doc = change.doc;
           this.messages.push({
             id: doc.id,
             name: doc.data().name,
             message: doc.data().message,
-            timestamp: moment(doc.data().timestamp).format("LTS")
+            timestamp: moment(doc.data().timestamp).format("LTS"),
           });
         }
       });
     });
   },
-  methods:{
-    signout(){
-    this.$router.push({name:'Login'});
-  }
-}
+  methods: {
+    signout() {
+      this.$router.push({ name: "Login" });
+    },
+  },
 };
 </script>
 
@@ -95,11 +99,19 @@ export default {
   display: inline-block;
   overflow: auto;
   background-color: red;
-  margin-top:1em;
+  margin-top: 3%;
   margin-bottom: 0;
 }
 
-.signOutDiv{
+.signOutDiv {
   text-align: right;
+}
+
+.chat1 {
+  margin-top: 8%;
+}
+
+.chat {
+  transform: scale(1.5);
 }
 </style>

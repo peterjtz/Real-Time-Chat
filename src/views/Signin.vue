@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div class="card login">
+    <div class="container log">
+        <div class="card login log1">
             <div class="card-body">
                 <h2 class="card-title text-center">Account Sign In</h2>
                 <form @submit.prevent="login" class="text-center">

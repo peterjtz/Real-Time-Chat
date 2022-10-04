@@ -5,24 +5,28 @@
         <input
           type="text"
           name="message"
-          class="form-control"
+          class="form-control inputText"
           placeholder="Enter message ..."
           v-model="newMessage"
           id="inputText"
         />
+        <div class="emoPos">
+          <button class="emoji" @click="popup()" type="button">Emoji</button>
+        </div>
         <p class="text-danger" v-if="errorText">{{ errorText }}</p>
       </div>
       <button class="btn btn-primary" type="submit" name="action">
         Submit
       </button>
     </form>
-    <button class="emoji" @click="popup()">Emoji</button>
     <div class="popup" id="popup">
-    <picker class="picker" id="trigger"
-      @select="addEmoji"
-      :style="{ position: 'absolute', top: '-15vh', right: '1.5vw' }"
-    />
-  </div>
+      <picker
+        class="picker"
+        id="trigger"
+        @select="addEmoji"
+        :style="{ position: 'absolute', top: '-15vh', right: '1.5vw' }"
+      />
+    </div>
   </div>
 </template>
 
@@ -54,17 +58,14 @@ export default {
         let type = change.type;
         if (type === "added") {
           this.wordList.push(dWord);
-        }
-        else if(type === "removed"){
-            for (let i=0;i<this.wordList.length;i++)
-            {
-              if(this.wordList[i] === dWord)
-              {
-                this.wordList.splice(i,1);
-                break;
-              }
+        } else if (type === "removed") {
+          for (let i = 0; i < this.wordList.length; i++) {
+            if (this.wordList[i] === dWord) {
+              this.wordList.splice(i, 1);
+              break;
             }
           }
+        }
       });
     });
   },
@@ -110,31 +111,37 @@ export default {
       let inputText = document.getElementById("inputText");
       inputText.value = inputText.value + emoji.native;
     },
-    popup(){
+    popup() {
       let trigger = document.getElementById("trigger");
       trigger.classList.toggle("hide");
-    }
+    },
   },
 };
 </script>
 
 <style>
-
-.emoji{
+.emoji {
   position: relative;
-  right: -38vw;
-  top: -16vh;
+  margin-top: 0.5%;
 }
-
-.popup{
+.popup {
   visibility: hidden;
 }
 
-.picker{
+.picker {
   visibility: hidden;
 }
 
-.hide{
+.hide {
   visibility: visible;
+}
+
+.inputText {
+  position: absolute;
+  transform: scale(0.95);
+}
+
+.emoPos {
+  text-align: right;
 }
 </style>
