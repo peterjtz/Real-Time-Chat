@@ -199,7 +199,7 @@ export default {
 }
 
 .log1 {
-  transform: scale(3);
+  transform: scale(2);
 }
 
 .log {

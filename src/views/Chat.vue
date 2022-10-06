@@ -112,6 +112,6 @@ export default {
 }
 
 .chat {
-  transform: scale(1.5);
+  transform: scale(1.4);
 }
 </style>

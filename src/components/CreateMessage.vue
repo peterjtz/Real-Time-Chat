@@ -1,5 +1,8 @@
 <template>
   <div class="container" style="margin-bottom: 30px">
+    <div class="popup" id="popup">
+      <picker class="picker" id="trigger" @select="addEmoji" />
+    </div>
     <form @submit.prevent="createMessage">
       <div class="form-group">
         <input
@@ -19,14 +22,6 @@
         Submit
       </button>
     </form>
-    <div class="popup" id="popup">
-      <picker
-        class="picker"
-        id="trigger"
-        @select="addEmoji"
-        :style="{ position: 'absolute', top: '-15vh', right: '1.5vw' }"
-      />
-    </div>
   </div>
 </template>
 
@@ -125,6 +120,9 @@ export default {
   margin-top: 0.5%;
 }
 .popup {
+  position: absolute;
+  right: 0px;
+  top: -15%;
   visibility: hidden;
 }
 
