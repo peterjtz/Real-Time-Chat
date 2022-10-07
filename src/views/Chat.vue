@@ -32,7 +32,6 @@
 <script>
 import CreateMessage from "@/components/CreateMessage";
 import fb from "@/firebase/init";
-import moment from "moment";
 
 export default {
   name: "Chat",
@@ -56,13 +55,18 @@ export default {
             id: doc.id,
             name: doc.data().name,
             message: doc.data().message,
-            timestamp: moment(doc.data().timestamp).format("LTS"),
+            timestamp: this.format(doc.data().timestamp),
           });
         }
       });
     });
   },
   methods: {
+    format(timestamp) {
+      var newDate = new Date();
+      newDate.setTime(timestamp);
+      return newDate.toLocaleTimeString();
+    },
     signout() {
       this.$router.push({ name: "Login" });
     },
