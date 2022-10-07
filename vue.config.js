@@ -4,6 +4,7 @@ const { mainModule } = require('process');
 
 module.exports = {
     configureWebpack: {
+      mode: 'production',
       entry: './src/main.js',
       plugins: [
         new CompressionPlugin({
