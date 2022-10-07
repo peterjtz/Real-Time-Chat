@@ -1,22 +1,24 @@
-const CompressionPlugin = require('compression-webpack-plugin');
-const BrotliPlugin = require('brotli-webpack-plugin');
-
+const zlib = require("zlib");
 module.exports = {
-    configureWebpack: {
-      plugins: [
-        new CompressionPlugin({
-        filename: '[path].gz[query]',
+  pluginOptions: {
+    compression:{
+      brotli: {
+        filename: '[file].br[query]',
+        algorithm: 'brotliCompress',
+        include: /\.(js|css|html|svg|json)(\?.*)?$/i,
+        compressionOptions: {
+          params: {
+            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        },
+        minRatio: 0.8,
+      },
+      gzip: {
+        filename: '[file].gz[query]',
         algorithm: 'gzip',
-        test: /\.(js|css|html|svg)$/,
-        threshold: 8192,
-        minRatio: 0.8
-        }),
-        new BrotliPlugin({
-          asset: '[path].br[query]',
-          test: /\.(js|css|html|svg)$/,
-          threshold: 10240,
-          minRatio: 0.8
-        })
-      ]
-    },   
+        include: /\.(js|css|html|svg|json)(\?.*)?$/i,
+        minRatio: 0.8,
+      }
+    }
   }
+}
