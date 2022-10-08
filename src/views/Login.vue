@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import fb from "@/firebase/init";
 export default {
   name: "login",
   data() {
@@ -47,6 +45,7 @@ export default {
     };
   },
   created() {
+    const fb = import("@/firebase/init");
     let ref = fb.collection("username");
     let ref2 = fb.collection("email");
 
@@ -95,7 +94,8 @@ export default {
       while (this.userList.includes(this.name)) {
         this.name = assignRandom(this.name);
       }
-      fb.collection("username")
+      import("@/firebase/init")
+        .collection("username")
         .add({
           name: this.name,
         })
@@ -110,6 +110,8 @@ export default {
     },
 
     googleLogin() {
+      const fb = import("@/firebase/init");
+      const firebase = import("firebase");
       function assignRandom(name) {
         let randomNumber1 = Math.floor(Math.random() * 10);
         let randomNumber2 = Math.floor(Math.random() * 10);
