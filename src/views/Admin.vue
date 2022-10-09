@@ -29,8 +29,6 @@
 
 <script>
 import WordList from "@/components/WordList";
-import fb from "@/firebase/init";
-import firebase from "firebase";
 
 export default {
   name: "Admin",
@@ -44,30 +42,35 @@ export default {
     };
   },
   created() {
-    const user = firebase.auth().currentUser;
+    // import firebase
+    import("@/firebase/init").then((init) => {
+      const fb = init.default.firestore;
+      const firebase = init.default.firebase;
+      const user = firebase.auth().currentUser;
 
-    if (user === null || user.email !== "jiaotianze123@gmail.com") {
-      this.$router.push({ name: "Login" });
-    }
-    let ref = fb.collection("wordList");
+      if (user === null || user.email !== "jiaotianze123@gmail.com") {
+        this.$router.push({ name: "Login" });
+      }
+      let ref = fb.collection("wordList");
 
-    ref.onSnapshot((snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        let type = change.type;
-        let doc = change.doc;
-        let dWord = doc.data().word;
-        if (type === "added") {
-          this.messages.push({
-            message: dWord,
-          });
-        } else if (type === "removed") {
-          for (let i = 0; i < this.messages.length; i++) {
-            if (this.messages[i].message === dWord) {
-              this.messages.splice(i, 1);
-              break;
+      ref.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          let type = change.type;
+          let doc = change.doc;
+          let dWord = doc.data().word;
+          if (type === "added") {
+            this.messages.push({
+              message: dWord,
+            });
+          } else if (type === "removed") {
+            for (let i = 0; i < this.messages.length; i++) {
+              if (this.messages[i].message === dWord) {
+                this.messages.splice(i, 1);
+                break;
+              }
             }
           }
-        }
+        });
       });
     });
   },

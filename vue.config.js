@@ -1,6 +1,6 @@
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     configureWebpack: {
@@ -20,7 +20,7 @@ module.exports = {
           threshold: 10240,
           minRatio: 0.8
         }),
-        //new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin()
       ]
     }
   }

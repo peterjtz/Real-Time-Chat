@@ -31,7 +31,6 @@
 
 <script>
 import CreateMessage from "@/components/CreateMessage";
-import fb from "@/firebase/init";
 
 export default {
   name: "Chat",
@@ -45,19 +44,23 @@ export default {
     };
   },
   created() {
-    let ref = fb.collection("messages").orderBy("timestamp");
+    // import firebase
+    import("@/firebase/init").then((init) => {
+      const fb = init.default.firestore;
+      let ref = fb.collection("messages").orderBy("timestamp");
 
-    ref.onSnapshot((snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        if (change.type == "added") {
-          let doc = change.doc;
-          this.messages.push({
-            id: doc.id,
-            name: doc.data().name,
-            message: doc.data().message,
-            timestamp: this.format(doc.data().timestamp),
-          });
-        }
+      ref.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type == "added") {
+            let doc = change.doc;
+            this.messages.push({
+              id: doc.id,
+              name: doc.data().name,
+              message: doc.data().message,
+              timestamp: this.format(doc.data().timestamp),
+            });
+          }
+        });
       });
     });
   },

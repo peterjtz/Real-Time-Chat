@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import fb from "@/firebase/init";
-//import { VueChatEmoji, emojis } from 'vue-chat-emoji'
 import { Picker } from "emoji-mart-vue";
 export default {
   name: "CreateMessage",
@@ -43,24 +41,28 @@ export default {
     };
   },
   created() {
-    // Create Word List
-    let ref = fb.collection("wordList");
+    // import firebase
+    import("@/firebase/init").then((init) => {
+      const fb = init.default.firestore;
+      // Create Word List
+      let ref = fb.collection("wordList");
 
-    ref.onSnapshot((snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        let doc = change.doc;
-        let dWord = doc.data().word;
-        let type = change.type;
-        if (type === "added") {
-          this.wordList.push(dWord);
-        } else if (type === "removed") {
-          for (let i = 0; i < this.wordList.length; i++) {
-            if (this.wordList[i] === dWord) {
-              this.wordList.splice(i, 1);
-              break;
+      ref.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          let doc = change.doc;
+          let dWord = doc.data().word;
+          let type = change.type;
+          if (type === "added") {
+            this.wordList.push(dWord);
+          } else if (type === "removed") {
+            for (let i = 0; i < this.wordList.length; i++) {
+              if (this.wordList[i] === dWord) {
+                this.wordList.splice(i, 1);
+                break;
+              }
             }
           }
-        }
+        });
       });
     });
   },
@@ -81,26 +83,29 @@ export default {
         return msg;
       }
 
-      //const wordList = ["shit","piss","fuck","cunt","cocksucker"];
-
       let inputText = document.getElementById("inputText");
       this.newMessage = inputText.value;
       this.newMessage = filterMessage(this.newMessage, this.wordList);
-      if (this.newMessage) {
-        fb.collection("messages")
-          .add({
-            message: this.newMessage,
-            name: this.name,
-            timestamp: Date.now(),
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        this.newMessage = null;
-        this.errorText = null;
-      } else {
-        this.errorText = "A message must be entered first!";
-      }
+
+      // import firebase
+      import("@/firebase/init").then((init) => {
+        const fb = init.default.firestore;
+        if (this.newMessage) {
+          fb.collection("messages")
+            .add({
+              message: this.newMessage,
+              name: this.name,
+              timestamp: Date.now(),
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          this.newMessage = null;
+          this.errorText = null;
+        } else {
+          this.errorText = "A message must be entered first!";
+        }
+      });
     },
     addEmoji(emoji) {
       let inputText = document.getElementById("inputText");
