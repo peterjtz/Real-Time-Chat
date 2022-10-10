@@ -26,7 +26,9 @@
 </template>
 
 <script>
+import init from "@/firebase/init";
 import { Picker } from "emoji-mart-vue";
+const fb = init.firestore;
 export default {
   name: "CreateMessage",
   props: ["name"],
@@ -41,28 +43,24 @@ export default {
     };
   },
   created() {
-    // import firebase
-    import("@/firebase/init").then((init) => {
-      const fb = init.default.firestore;
-      // Create Word List
-      let ref = fb.collection("wordList");
+    // Create Word List
+    let ref = fb.collection("wordList");
 
-      ref.onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          let doc = change.doc;
-          let dWord = doc.data().word;
-          let type = change.type;
-          if (type === "added") {
-            this.wordList.push(dWord);
-          } else if (type === "removed") {
-            for (let i = 0; i < this.wordList.length; i++) {
-              if (this.wordList[i] === dWord) {
-                this.wordList.splice(i, 1);
-                break;
-              }
+    ref.onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        let doc = change.doc;
+        let dWord = doc.data().word;
+        let type = change.type;
+        if (type === "added") {
+          this.wordList.push(dWord);
+        } else if (type === "removed") {
+          for (let i = 0; i < this.wordList.length; i++) {
+            if (this.wordList[i] === dWord) {
+              this.wordList.splice(i, 1);
+              break;
             }
           }
-        });
+        }
       });
     });
   },
@@ -86,26 +84,21 @@ export default {
       let inputText = document.getElementById("inputText");
       this.newMessage = inputText.value;
       this.newMessage = filterMessage(this.newMessage, this.wordList);
-
-      // import firebase
-      import("@/firebase/init").then((init) => {
-        const fb = init.default.firestore;
-        if (this.newMessage) {
-          fb.collection("messages")
-            .add({
-              message: this.newMessage,
-              name: this.name,
-              timestamp: Date.now(),
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          this.newMessage = null;
-          this.errorText = null;
-        } else {
-          this.errorText = "A message must be entered first!";
-        }
-      });
+      if (this.newMessage) {
+        fb.collection("messages")
+          .add({
+            message: this.newMessage,
+            name: this.name,
+            timestamp: Date.now(),
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        this.newMessage = null;
+        this.errorText = null;
+      } else {
+        this.errorText = "A message must be entered first!";
+      }
     },
     addEmoji(emoji) {
       let inputText = document.getElementById("inputText");

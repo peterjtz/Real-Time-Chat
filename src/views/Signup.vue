@@ -30,6 +30,9 @@
 </template>
 
 <script>
+import init from "@/firebase/init";
+const fb = init.firestore;
+const firebase = init.firebase;
 export default {
   name: "Signup",
   data() {
@@ -42,18 +45,14 @@ export default {
     };
   },
   created() {
-    // import firebase
-    import("@/firebase/init").then((init) => {
-      const fb = init.default.firestore;
-      let ref = fb.collection("username");
+    let ref = fb.collection("username");
 
-      ref.onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type == "added") {
-            let doc = change.doc;
-            this.userList.push(doc.data().name);
-          }
-        });
+    ref.onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type == "added") {
+          let doc = change.doc;
+          this.userList.push(doc.data().name);
+        }
       });
     });
   },
@@ -84,36 +83,31 @@ export default {
       }
       this.errorText = null;
 
-      // import firebase
-      import("@/firebase/init").then((init) => {
-        const fb = init.default.firestore;
-        const firebase = init.default.firebase;
-        // Log the user in
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then((result) => {
-            const user = result.user;
-            user.updateProfile({ displayName: this.name });
-            alert("Account has been created successfully!");
+      // Log the user in
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then((result) => {
+          const user = result.user;
+          user.updateProfile({ displayName: this.name });
+          alert("Account has been created successfully!");
 
-            // Add username to database
-            fb.collection("username")
-              .add({
-                name: this.name,
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+          // Add username to database
+          fb.collection("username")
+            .add({
+              name: this.name,
+            })
+            .catch((err) => {
+              console.log(err);
+            });
 
-            // Redirect to sign in Page
-            this.$router.push({ name: "Signin" });
-          })
-          .catch((error) => {
-            alert(error.message);
-            console.log(error.code);
-          });
-      });
+          // Redirect to sign in Page
+          this.$router.push({ name: "Signin" });
+        })
+        .catch((error) => {
+          alert(error.message);
+          console.log(error.code);
+        });
     },
   },
 };

@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import init from "@/firebase/init";
+const firebase = init.firebase;
 export default {
   name: "Login",
   data() {
@@ -32,22 +34,18 @@ export default {
   },
   methods: {
     login: function() {
-      // import firebase
-      import("@/firebase/init").then((init) => {
-        const firebase = init.default.firebase;
-        // Log the user in
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(this.email, this.password)
-          .then((result) => {
-            const user = result.user.displayName;
-            this.$router.push({ name: "Chat", params: { name: user } });
-          })
-          .catch((error) => {
-            alert(error.message);
-            console.log(error.code);
-          });
-      });
+      // Log the user in
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then((result) => {
+          const user = result.user.displayName;
+          this.$router.push({ name: "Chat", params: { name: user } });
+        })
+        .catch((error) => {
+          alert(error.message);
+          console.log(error.code);
+        });
     },
   },
 };

@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import init from "@/firebase/init";
+const fb = init.firestore;
 export default {
   name: "WordList",
   props: ["name"],
@@ -31,42 +33,38 @@ export default {
   },
   methods: {
     createMessage() {
-      // import firebase
-      import("@/firebase/init").then((init) => {
-        const fb = init.default.firestore;
-        if (this.newMessage[0] == "$") {
-          this.newMessage = this.newMessage.replace("$", "");
-          let ref = fb.collection("wordList");
+      if (this.newMessage[0] == "$") {
+        this.newMessage = this.newMessage.replace("$", "");
+        let ref = fb.collection("wordList");
 
-          ref.onSnapshot((snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-              if (change.type == "added") {
-                let doc = change.doc;
-                let id = doc.id;
-                let msg = doc.data().word;
-                if (msg == this.newMessage) {
-                  fb.collection("wordList")
-                    .doc(id)
-                    .delete();
-                  this.newMessage = null;
-                }
+        ref.onSnapshot((snapshot) => {
+          snapshot.docChanges().forEach((change) => {
+            if (change.type == "added") {
+              let doc = change.doc;
+              let id = doc.id;
+              let msg = doc.data().word;
+              if (msg == this.newMessage) {
+                fb.collection("wordList")
+                  .doc(id)
+                  .delete();
+                this.newMessage = null;
               }
-            });
+            }
           });
-        } else if (this.newMessage) {
-          fb.collection("wordList")
-            .add({
-              word: this.newMessage,
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          this.newMessage = null;
-          this.errorText = null;
-        } else {
-          this.errorText = "A word must be entered first!";
-        }
-      });
+        });
+      } else if (this.newMessage) {
+        fb.collection("wordList")
+          .add({
+            word: this.newMessage,
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        this.newMessage = null;
+        this.errorText = null;
+      } else {
+        this.errorText = "A word must be entered first!";
+      }
     },
   },
 };
