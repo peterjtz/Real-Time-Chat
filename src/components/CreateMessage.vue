@@ -22,6 +22,10 @@
         Submit
       </button>
     </form>
+    <picker
+      @select="addEmoji"
+      :style="{ position: 'absolute', top: '30em', right: '35em' }"
+    />
   </div>
 </template>
 
