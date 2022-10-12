@@ -27,7 +27,6 @@
 
 <script>
 import fb from "@/firebase/init";
-//import { VueChatEmoji, emojis } from 'vue-chat-emoji'
 import { Picker } from "emoji-mart-vue";
 export default {
   name: "CreateMessage",
@@ -80,8 +79,6 @@ export default {
 
         return msg;
       }
-
-      //const wordList = ["shit","piss","fuck","cunt","cocksucker"];
 
       let inputText = document.getElementById("inputText");
       this.newMessage = inputText.value;
