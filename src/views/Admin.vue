@@ -29,8 +29,9 @@
 
 <script>
 import WordList from "@/components/WordList";
-import fb from "@/firebase/init";
-import firebase from "firebase";
+import init from "@/firebase/init";
+const fb = init.firestore;
+const firebase = init.firebase;
 
 export default {
   name: "Admin",

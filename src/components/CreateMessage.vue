@@ -26,8 +26,9 @@
 </template>
 
 <script>
-import fb from "@/firebase/init";
+import init from "@/firebase/init";
 import { Picker } from "emoji-mart-vue";
+const fb = init.firestore;
 export default {
   name: "CreateMessage",
   props: ["name"],

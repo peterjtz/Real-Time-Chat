@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import fb from "@/firebase/init";
+import init from "@/firebase/init";
+const fb = init.firestore;
 export default {
   name: "WordList",
   props: ["name"],
@@ -33,7 +34,7 @@ export default {
   methods: {
     createMessage() {
       if (this.newMessage[0] == "$") {
-        this.newMessage = this.newMessage.replace('$','');
+        this.newMessage = this.newMessage.replace("$", "");
         let ref = fb.collection("wordList");
 
         ref.onSnapshot((snapshot) => {
@@ -42,11 +43,10 @@ export default {
               let doc = change.doc;
               let id = doc.id;
               let msg = doc.data().word;
-              if(msg == this.newMessage)
-              {
+              if (msg == this.newMessage) {
                 fb.collection("wordList")
-                .doc(id)
-                .delete();
+                  .doc(id)
+                  .delete();
                 this.newMessage = null;
               }
             }

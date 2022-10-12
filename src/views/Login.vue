@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import fb from "@/firebase/init";
 export default {
   name: "login",
   data() {
@@ -47,26 +45,28 @@ export default {
     };
   },
   created() {
-    let ref = fb.collection("username");
-    let ref2 = fb.collection("email");
+    import("@/firebase/init").then((init) => {
+      const fb = init.default.firestore;
+      debugger;
+      let ref = fb.collection("username");
+      let ref2 = fb.collection("email");
 
-    ref.onSnapshot((snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        if (change.type == "added") {
-          let doc = change.doc;
-          this.userList.push(doc.data().name);
-          //debugger;
-        }
+      ref.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type == "added") {
+            let doc = change.doc;
+            this.userList.push(doc.data().name);
+          }
+        });
       });
-    });
 
-    ref2.onSnapshot((snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        if (change.type == "added") {
-          let doc = change.doc;
-          this.emailList.push(doc.data().mail);
-          //debugger;
-        }
+      ref2.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type == "added") {
+            let doc = change.doc;
+            this.emailList.push(doc.data().mail);
+          }
+        });
       });
     });
   },
@@ -76,7 +76,7 @@ export default {
         this.errorText = "Please enter a name first!";
         return;
       }
-      //debugger;
+
       function assignRandom(name) {
         let randomNumber1 = Math.floor(Math.random() * 10);
         let randomNumber2 = Math.floor(Math.random() * 10);
@@ -91,18 +91,25 @@ export default {
           randomNumber4;
         return name;
       }
+
       this.name = assignRandom(this.name);
       while (this.userList.includes(this.name)) {
         this.name = assignRandom(this.name);
       }
-      fb.collection("username")
-        .add({
-          name: this.name,
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      this.$router.push({ name: "Chat", params: { name: this.name } });
+
+      // import fb from firebase
+      import("@/firebase/init").then((init) => {
+        const fb = init.default.firestore;
+        debugger;
+        fb.collection("username")
+          .add({
+            name: this.name,
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        this.$router.push({ name: "Chat", params: { name: this.name } });
+      });
     },
 
     accountLogin() {
@@ -124,66 +131,73 @@ export default {
           randomNumber4;
         return name;
       }
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-          const user = result.user;
-          if (user.email === "jiaotianze123@gmail.com") {
-            this.$router.push({ name: "Admin" });
-          } else {
-            if (!this.emailList.includes(user.email)) {
-              let temp = assignRandom(user.displayName);
-              while (this.userList.includes(temp)) {
-                temp = assignRandom(temp);
-              }
-              fb.collection("username")
-                .add({
-                  name: temp,
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
 
-              fb.collection("email")
-                .add({
-                  name: temp,
-                  mail: user.email,
-                })
-                .catch((err) => {
-                  console.log(err);
+      //import firebase
+      import("@/firebase/init").then((init) => {
+        const fb = init.default.firestore;
+        const firebase = init.default.firebase;
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase
+          .auth()
+          .signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            if (user.email === "jiaotianze123@gmail.com") {
+              this.$router.push({ name: "Admin" });
+            } else {
+              if (!this.emailList.includes(user.email)) {
+                let temp = assignRandom(user.displayName);
+                while (this.userList.includes(temp)) {
+                  temp = assignRandom(temp);
+                }
+
+                fb.collection("username")
+                  .add({
+                    name: temp,
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+
+                fb.collection("email")
+                  .add({
+                    name: temp,
+                    mail: user.email,
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+                this.$router.push({
+                  name: "Chat",
+                  params: { name: temp },
                 });
-              this.$router.push({
-                name: "Chat",
-                params: { name: temp },
+              }
+
+              let ref = fb.collection("email");
+              let userName = "";
+
+              ref.onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                  if (change.type == "added") {
+                    let doc = change.doc;
+                    let mail = doc.data().mail;
+                    if (mail === user.email) {
+                      userName = doc.data().name;
+                      this.$router.push({
+                        name: "Chat",
+                        params: { name: userName },
+                      });
+                    }
+                  }
+                });
               });
             }
-
-            let ref = fb.collection("email");
-            let userName = "";
-
-            ref.onSnapshot((snapshot) => {
-              snapshot.docChanges().forEach((change) => {
-                if (change.type == "added") {
-                  let doc = change.doc;
-                  let mail = doc.data().mail;
-                  if (mail === user.email) {
-                    userName = doc.data().name;
-                    this.$router.push({
-                      name: "Chat",
-                      params: { name: userName },
-                    });
-                  }
-                }
-              });
-            });
-          }
-        })
-        .catch((error) => {
-          alert(error.message);
-          console.log(error.code);
-        });
+          })
+          .catch((error) => {
+            alert(error.message);
+            console.log(error.code);
+          });
+      });
     },
   },
 };

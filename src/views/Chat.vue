@@ -31,7 +31,8 @@
 
 <script>
 import CreateMessage from "@/components/CreateMessage";
-import fb from "@/firebase/init";
+import init from "@/firebase/init";
+const fb = init.firestore;
 
 export default {
   name: "Chat",

@@ -30,8 +30,9 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import fb from "@/firebase/init";
+import init from "@/firebase/init";
+const fb = init.firestore;
+const firebase = init.firebase;
 export default {
   name: "Signup",
   data() {
