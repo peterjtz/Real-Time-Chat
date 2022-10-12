@@ -1,23 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-const Login = () => import("../views/Login.vue");
-const Chat = () => import("../views/Chat.vue");
-const Signin = () => import("../views/Signin.vue");
-const Signup = () => import("../views/Signup.vue");
-const Admin = () => import("../views/Admin.vue");
 
 Vue.use(VueRouter);
+
+function lazyLoad(view){
+  return() => import(`@/views/${view}.vue`)
+}
 
 const routes = [
   {
     path: "/",
     name: "Login",
-    component: Login
+    component: lazyLoad('Login')
   },
   {
     path: "/chat",
     name: "Chat",
-    component: Chat,
+    component: lazyLoad('Chat'),
     props: true,
     // prevent user going to chat view without logging in
     beforeEnter: (to, from, next) => {
@@ -31,17 +30,17 @@ const routes = [
   {
     path: "/signin",
     name: "Signin",
-    component: Signin
+    component: lazyLoad('Signin')
   },
   {
     path: "/signup",
     name: "Signup",
-    component: Signup
+    component: lazyLoad('Signup')
   },
   {
     path: "/admin",
     name: "Admin",
-    component: Admin
+    component: lazyLoad('Admin')
   }
 ];
 
