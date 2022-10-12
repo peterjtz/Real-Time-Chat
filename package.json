@@ -17,7 +17,7 @@
     "express": "^4.18.1",
     "firebase": "^7.14.5",
     "jquery": "^3.5.1",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "popper.js": "^1.16.1",
     "serve-static": "^1.15.0",
     "vue": "^2.6.11",
