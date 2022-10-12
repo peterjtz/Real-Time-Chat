@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
-import Chat from "../views/Chat.vue";
-import Signin from "../views/Signin.vue";
-import Signup from "../views/Signup.vue"
-import Admin from "../views/Admin.vue"
+const Login = () => import("../views/Login.vue");
+const Chat = () => import("../views/Chat.vue");
+const Signin = () => import("../views/Signin.vue");
+const Signup = () => import("../views/Signup.vue");
+const Admin = () => import("../views/Admin.vue");
 
 Vue.use(VueRouter);
 
