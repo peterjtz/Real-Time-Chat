@@ -41,45 +41,20 @@ $ npm run serve
 
 ## Features
 
-### Max number in the database
-
-### Max number of messages in the database
-
-> For each chat room, there is a max number of 50 messages. When the number of messages exceed 50, the oldest message will be deleted. This is done by Firebase Cloud Functions.
-
 ### Sign in/ Register methods
 
-1. Facebook
+1. Guest
 
-2. Google+
+2. Email/ Password
 
-3. Email/ Password
+3. Google
 
-### Type of Users
+### Chat Function
 
-> There are three types of users and they have different user permissions:
-
-**1) admin**
-
-- Can read all 50 past messages in each chat room after log in
-- Can write new message
-- Can edit any user's messages and it will leave a record
-- Can delete any user's messages
-
-**2) unverified users**
-
-- Users who sign in as guest are classified as unverified user
-- Cannot read any past message in any chat room after log in
-- Can write new message
-- Cannot edit/ delete any message
-
-**3) verified users**
-
-- Users who sign in using Facebook/ Google/ email are classified as verified user
-- Can read 20 past messages in each chat room after log in
-- Can write new message
-- Can edit his/ her own messages and it will leave a record
-- Can delete his/ her own messages
+-Display username in a unique form: username + 4-digit ID
+-Show the time when message was sent
+-Allow users to pick and send emoji
+-Filter bad words
 
 ### How to switch to other chat room
 
