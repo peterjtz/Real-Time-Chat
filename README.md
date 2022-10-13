@@ -51,10 +51,10 @@ $ npm run serve
 
 ### Chat Function
 
--Display username in a unique form: username + 4-digit ID
--Show the time when message was sent
--Allow users to pick and send emoji
--Filter bad words
+- Display username in a unique form: username + 4-digit ID
+- Show the time when message was sent
+- Allow users to pick and send emoji
+- Filter bad words
 
 ### How to switch to other chat room
 
