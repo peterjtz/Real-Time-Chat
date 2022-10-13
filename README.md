@@ -1,29 +1,7 @@
-# vue-chat1
+# Firebase-ChatApp
 
-## Project setup
-```
-npm install
-```
+## This is a Chat App built with Firebase, Vue.js, Node.js, Bootstrap and Font Awesome.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## It is deployed using Heroku:[https://official-chat-app.herokuapp.com/](https://official-chat-app.herokuapp.com/)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## This Chat App has achieved a [95+% Google PageSpeed Insights score](https://pagespeed.web.dev/report?url=https%3A%2F%2Fofficial-chat-app.herokuapp.com%2F&form_factor=desktop)
