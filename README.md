@@ -25,7 +25,7 @@
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/calvin197/Firebase-ChatApp.git`
+- Clone this repo to your local machine using `https://github.com/peterjtz/Real-Time-Chat.git`
 
 ### Setup
 
