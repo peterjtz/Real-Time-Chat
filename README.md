@@ -6,7 +6,7 @@
 
 > This Chat App has achieved a <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fofficial-chat-app.herokuapp.com%2F&form_factor=desktop">95+% Google PageSpeed Insights score </a>
 
-<a href="https://www.flickr.com/photos/188674698@N05/49957567913/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/49957567913_85dce131be_b.jpg" title="Login"></a>
+<a href="https://www.flickr.com/photos/196782410@N08/52425782816/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/52425782816_253ed97634_h.jpg" title="Login"></a>
 
 **_Login Page_**
 
