@@ -76,6 +76,18 @@ $ npm run serve
 
 ![Recordit GIF](https://s4.gifyu.com/images/filterAdd.gif)
 
+### How to delete a word from Filter Wordlist in Admin Page
+
+1. Type the symbol '\$' and the word in the input field
+
+1. Press 'Enter' or click Submit button
+
+1. In the mean time, the word will no longer be filtered when sending in the chat
+
+![Recordit GIF](https://s4.gifyu.com/images/adminDelete.gif)
+
+![Recordit GIF](https://s4.gifyu.com/images/filterDelete.gif)
+
 ## Performance
 
 > To optimize the web site performance, the following techniques are used:
