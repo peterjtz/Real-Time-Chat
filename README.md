@@ -58,11 +58,11 @@ $ npm run serve
 
 ### How to send message and emoji
 
-![Recordit GIF](https://s4.gifyu.com/images/FilterWord.gif)
+![Recordit GIF](https://s4.gifyu.com/images/messageAndEmoji.gif)
 
 ### Filter Words Demo
 
-![Recordit GIF](https://s4.gifyu.com/images/messageAndEmoji.gif)
+![Recordit GIF](https://s4.gifyu.com/images/filter5aaa866679a0aa99.gif)
 
 ### How to delete a message
 
