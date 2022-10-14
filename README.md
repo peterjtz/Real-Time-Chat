@@ -60,18 +60,9 @@ $ npm run serve
 
 ![Recordit GIF](https://s4.gifyu.com/images/messageAndEmoji.gif)
 
-### How to edit a message
+### Filter Words Demo
 
-1. Click on the message content\*\*
-1. Click on the message content
-
-1. Edit the text in the text box\*\*
-1. Edit the text in the text box
-
-1. Press Enter/ Return\*\*
-1. Press Enter/ Return
-
-![Recordit GIF](http://g.recordit.co/gShLErgpAZ.gif)
+![Recordit GIF](https://s4.gifyu.com/images/FilterWord.gif)
 
 ### How to delete a message
 
