@@ -106,8 +106,8 @@ $ npm install brotli-webpack-plugin compression-webpack-plugin express-static-gz
 > The size of Moment.js is massive. It was removed and replaced with native JS code (see the following code). After removing Moment.js, the largest JS bundle size reduced more than 350KB (around 30-40% of the original bundle size).
 
 ```javascript
-// vue-chat1/src/components/ChatRoom.vue
-// line 143-147
+// src/components/Chat.vue
+// line 66-70
 format(timestamp) {
     var newDate = new Date();
     newDate.setTime(timestamp);
@@ -119,32 +119,26 @@ format(timestamp) {
 
 > ES6 import() was used to import dependencies(e.g. Firebase) / components dynamically. Dependencies/ components are imported only when they are needed. The Javascript bundle is split into multiple smaller bundles and hence the web site loads way faster because it only loads necessary components.
 
-> Notice how different components are lazy loaded in vue-chat1/src/router/index.js
+> Notice how different components are lazy loaded in src/router/index.js
 
 ```javascript
-// vue-chat1/src/router/index.js
-// line 6-8
-function lazyLoad(view) {
-  return () => import(`@/views/${view}.vue`);
-}
+// src/router/index.js
+// line 4-7
+const Chat = () => import("../views/Chat.vue");
+const Signin = () => import("../views/Signin.vue");
+const Signup = () => import("../views/Signup.vue");
+const Admin = () => import("../views/Admin.vue");
 ```
 
-> Notice how firebase is lazy loaded in vue-chat1/src/views/Login.vue
+> Notice how firebase is lazy loaded in src/views/Login.vue
 
 ```javascript
 // vue-chat1/src/views/Login.vue
-// line 114-124
-googleLogin() {
-  // lazy load firebase
-  import("@/firebase/init")
-    .then(init => {
-      return init.default.auth;
-    })
-    .then(auth => {
-      var provider = new auth.GoogleAuthProvider();
-      this.signInWithPopup(auth, provider, "Google");
-    });
-}
+import("@/firebase/init").then((init) => {
+  const fb = init.default.firestore;
+  const firebase = init.default.firebase;
+  // later content
+});
 ```
 
 ### Preconnect
