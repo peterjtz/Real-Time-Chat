@@ -141,33 +141,10 @@ import("@/firebase/init").then((init) => {
 });
 ```
 
-### Preconnect
-
-> Preconnect is a method that performs DNS lookups ahead of time so that by the time you make a request to your server, your browser already knows where to make the request.
-
-> vue-chat1/public/index.html
-
-```html
-<link rel="preconnect" href="https://vue-js-firebase-chat-app.herokuapp.com/" />
-```
-
 ### Result
 
 > 95+% Google PageSpeed Insights score
 
-> <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fvue-js-firebase-chat-app.herokuapp.com%2F&tab=desktop">https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fvue-js-firebase-chat-app.herokuapp.com%2F&tab=desktop</a>
+> <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fofficial-chat-app.herokuapp.com%2F&form_factor=desktop">https://pagespeed.web.dev/report?url=https%3A%2F%2Fofficial-chat-app.herokuapp.com%2F&form_factor=desktop</a>
 
-<a href="https://www.flickr.com/photos/188674698@N05/49958784637/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/49958784637_69785d0478_b.jpg" title="result"></a>
-
-## Tests
-
-> Unit test will be added and integrated with Circle CI.
-
-> Run unit test
-
-```shell
-$ npm run test:unit
-
-```
-
----
+<a href="https://www.flickr.com/photos/196782410@N08/52426728388/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/52426728388_d322211933_h.jpg" title="result"></a>
