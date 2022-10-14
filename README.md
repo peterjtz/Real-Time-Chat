@@ -56,13 +56,9 @@ $ npm run serve
 - Allow users to pick and send emoji
 - Filter bad words
 
-### How to switch to other chat room
+### How to send message and emoji
 
-![Recordit GIF](http://g.recordit.co/7tmwXgpIFw.gif)
-
-### How to send a message
-
-![Recordit GIF](http://g.recordit.co/ufJa2n0Kdg.gif)
+![Recordit GIF](https://s4.gifyu.com/images/messageAndEmoji.gif)
 
 ### How to edit a message
 
