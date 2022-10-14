@@ -19,7 +19,6 @@
 - [Installation](#installation)
 - [Features](#features)
 - [Performance](#performance)
-- [Tests](#tests)
 
 ## Installation
 
@@ -133,7 +132,7 @@ const Admin = () => import("../views/Admin.vue");
 > Notice how firebase is lazy loaded in src/views/Login.vue
 
 ```javascript
-// vue-chat1/src/views/Login.vue
+// src/views/Login.vue
 import("@/firebase/init").then((init) => {
   const fb = init.default.firestore;
   const firebase = init.default.firebase;
