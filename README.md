@@ -64,18 +64,17 @@ $ npm run serve
 
 ![Recordit GIF](https://s4.gifyu.com/images/filter5aaa866679a0aa99.gif)
 
-### How to delete a message
+### How to add a word to Filter Wordlist in Admin Page
 
-1. Click on the message content\*\*
-1. Click on the message content
+1. Type the word in the input field
 
-1. Delete the text in the text box\*\*
-1. Delete the text in the text box
+1. Press 'Enter' or click Submit button
 
-1. Press Enter/ Return\*\*
-1. Press Enter/ Return
+1. In the mean time, the word will be filtered when sending in the chat
 
-![Recordit GIF](http://g.recordit.co/3r7t8EcRpd.gif)
+![Recordit GIF](https://s4.gifyu.com/images/adminAdd.gif)
+
+![Recordit GIF](https://s4.gifyu.com/images/filterAdd.gif)
 
 ## Performance
 
