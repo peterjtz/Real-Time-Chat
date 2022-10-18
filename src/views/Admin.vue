@@ -19,7 +19,12 @@
           >
             <ol>
               <div v-for="message in messages" :key="message.id">
-                <li class="word">{{ message.message }}</li>
+                <li class="word">
+                  {{ message.message }}
+                  <button class="delete" @click="deleteWord(message.id)">
+                    Delete
+                  </button>
+                </li>
               </div>
             </ol>
           </div>
@@ -64,6 +69,7 @@ export default {
         let dWord = doc.data().word;
         if (type === "added") {
           this.messages.push({
+            id: doc.id,
             message: dWord,
           });
         } else if (type === "removed") {
@@ -80,6 +86,14 @@ export default {
   methods: {
     signout() {
       this.$router.push({ name: "Login" });
+    },
+    deleteWord(id) {
+      fb.collection("wordList")
+        .doc(id)
+        .delete()
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
@@ -129,5 +143,11 @@ export default {
 .word {
   text-align: left;
   font-size: 30px;
+}
+
+.delete {
+  position: absolute;
+  right: 2px;
+  background-color: green;
 }
 </style>

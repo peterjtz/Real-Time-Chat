@@ -47,7 +47,6 @@ export default {
   created() {
     import("@/firebase/init").then((init) => {
       const fb = init.default.firestore;
-      debugger;
       let ref = fb.collection("username");
       let ref2 = fb.collection("email");
 
@@ -100,7 +99,6 @@ export default {
       // import fb from firebase
       import("@/firebase/init").then((init) => {
         const fb = init.default.firestore;
-        debugger;
         fb.collection("username")
           .add({
             name: this.name,
