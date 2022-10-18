@@ -13,10 +13,15 @@
           <p class="nomessages text-secondary" v-if="messages.length == 0">
             [No messages yet!]
           </p>
-          <div class="messages" v-chat-scroll="{ always: false, smooth: true }">
-            <div v-for="message in messages" :key="message.id">
-              <span>word: {{ message.message }}</span>
-            </div>
+          <div
+            class="messages wordList"
+            v-chat-scroll="{ always: false, smooth: true }"
+          >
+            <ol>
+              <div v-for="message in messages" :key="message.id">
+                <li class="word">{{ message.message }}</li>
+              </div>
+            </ol>
           </div>
         </div>
         <div class="card-action">
@@ -115,5 +120,14 @@ export default {
 
 .signOutDiv {
   text-align: right;
+}
+
+.wordList {
+  text-align: center;
+}
+
+.word {
+  text-align: left;
+  font-size: 30px;
 }
 </style>
