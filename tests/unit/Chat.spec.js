@@ -5,7 +5,7 @@ const ChatWrapper = shallowMount(Chat);
 
 describe("Chat", () => {
     it("does h2 title exists",() => {
-        expect(ChatWrapper.find("h2").text()).toBe("Real-Time Cha");
+        expect(ChatWrapper.find("h2").text()).toBe("Real-Time Ch");
     });
 
     it("does h5 title exists",() => {
