@@ -153,10 +153,10 @@ import("@/firebase/init").then((init) => {
 
 > When a commit gets pushed to the master branch, Circle CI will build and test the latest build:
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/188674698@N05/49959826837/in/dateposted-public/" title="Screen Shot 2020-06-01 at 4.55.52 AM"><img src="https://live.staticflickr.com/65535/49959826837_d51268223f_b.jpg" alt="Screen Shot 2020-06-01 at 4.55.52 AM"></a>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/196782410@N08/52449368456/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/52449368456_fdc3b1b178_k.jpg"></a>
 
 > If all unit tests get passed, Heroku will start auto-deployment:
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/188674698@N05/49959545241/in/dateposted-public/" title="Screen Shot 2020-06-01 at 4.56.12 AM"><img src="https://live.staticflickr.com/65535/49959545241_a7c9671110_b.jpg" alt="Screen Shot 2020-06-01 at 4.56.12 AM"></a>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/196782410@N08/52449820540/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/52449820540_e81e517900_k.jpg"></a>
 
 > Run unit test
