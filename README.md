@@ -71,19 +71,17 @@ $ npm run serve
 
 1. In the mean time, the word will be filtered when sending in the chat
 
-![Recordit GIF](https://s4.gifyu.com/images/adminAdd.gif)
+![Recordit GIF](https://s4.gifyu.com/images/addWord.gif)
 
 ![Recordit GIF](https://s4.gifyu.com/images/filterAdd.gif)
 
 ### How to delete a word from Filter Wordlist in Admin Page
 
-1. Type the symbol '\$' and the word in the input field
-
-1. Press 'Enter' or click Submit button
+1. Click on the 'delete' button on the right side of the word
 
 1. In the mean time, the word will no longer be filtered when sending in the chat
 
-![Recordit GIF](https://s4.gifyu.com/images/adminDelete.gif)
+![Recordit GIF](https://s1.gifyu.com/images/deleteWord.gif)
 
 ![Recordit GIF](https://s4.gifyu.com/images/filterDelete.gif)
 
@@ -147,3 +145,18 @@ import("@/firebase/init").then((init) => {
 > <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fofficial-chat-app.herokuapp.com%2F&form_factor=desktop">https://pagespeed.web.dev/report?url=https%3A%2F%2Fofficial-chat-app.herokuapp.com%2F&form_factor=desktop</a>
 
 <a href="https://www.flickr.com/photos/196782410@N08/52426728388/in/dateposted-public/"><img src="https://live.staticflickr.com/65535/52426728388_d322211933_h.jpg" title="result"></a>
+
+## Tests
+
+> Unit test will be added and integrated with Circle CI.
+> Unit tests with Jest have be added and integrated with Github, Circle CI and Heroku CD.
+
+> When a commit gets pushed to the master branch, Circle CI will build and test the latest build:
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/188674698@N05/49959826837/in/dateposted-public/" title="Screen Shot 2020-06-01 at 4.55.52 AM"><img src="https://live.staticflickr.com/65535/49959826837_d51268223f_b.jpg" alt="Screen Shot 2020-06-01 at 4.55.52 AM"></a>
+
+> If all unit tests get passed, Heroku will start auto-deployment:
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/188674698@N05/49959545241/in/dateposted-public/" title="Screen Shot 2020-06-01 at 4.56.12 AM"><img src="https://live.staticflickr.com/65535/49959545241_a7c9671110_b.jpg" alt="Screen Shot 2020-06-01 at 4.56.12 AM"></a>
+
+> Run unit test
