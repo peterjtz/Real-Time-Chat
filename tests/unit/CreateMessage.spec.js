@@ -3,6 +3,7 @@ import CreateMessage from "@/components/CreateMessage.vue";
 
 const wrapper = shallowMount(CreateMessage);
 
+
 describe("CreateMessage", () => {
   it("has a createMessage method", () => {
     expect(typeof CreateMessage.methods.createMessage).toBe("function");
@@ -23,4 +24,8 @@ describe("CreateMessage", () => {
   it("renders the correct message", () => {
     expect(wrapper.text()).toBe("Emoji  \n      Submit");
   });
+
+  it("correctly filter words", () => {
+    CreateMessage.methods.createMessage
+  })
 });

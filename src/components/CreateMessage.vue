@@ -14,7 +14,7 @@
           id="inputText"
         />
         <div class="emoPos">
-          <button class="emoji" @click="popup()" type="button">Emoji</button>
+          <button class="emoji" @click="popup()" type="button">Emoji123</button>
         </div>
         <p class="text-danger" v-if="errorText">{{ errorText }}</p>
       </div>
