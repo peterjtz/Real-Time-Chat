@@ -1,6 +1,6 @@
 # Firebase-ChatApp
 
-> This is a Chat App built with Firebase, Vue.js, Node.js, Bootstrap and Font Awesome.
+> This is a Chat App built with Firebase, Vue.js, Node.js, and Bootstrap.
 
 > It is deployed using Heroku: <a href="https://official-chat-app.herokuapp.com/">https://official-chat-app.herokuapp.com/</a>
 
